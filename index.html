@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yustisio's Education</title>
+    <style>
+        @media (max-width: 750px) {
+        .container {
+            flex-direction: column;
+            margin: 0 10px;
+            padding: 10px;
+            align-items: center; /* Pastikan menu dan deskripsi sejajar tengah */
+            gap: 10px; /* Mengurangi jarak antar elemen */
+        }
+    
+        .menu {
+            width: 90%; /* Pastikan lebar menu sama dengan deskripsi */
+            max-height: none;
+            margin-bottom: 10px; /* Mengurangi jarak dengan deskripsi */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .description {
+            width: 90%; /* Pastikan lebar deskripsi sama dengan menu */
+            max-width: 800px; /* Maksimal lebar */
+            height: auto;
+            padding: 15px; /* Mengurangi padding agar lebih kompak */
+            font-size: 16px;
+            overflow-y: auto;
+            text-align: justify;
+            margin-left: 0; /* Hapus margin kiri agar sejajar dengan menu */
+        }
+    
+        .description-content {
+            font-size: 14px;
+            padding-right: 0;
+            padding-left: 0;
+        }
+    
+        figure img {
+            width: 100%;
+            max-width: 100%;
+        }
+    
+        .menu-item {
+            font-size: 13px;
+            text-align: center;
+        }
+    }
+    
+    @media (min-width: 1200px) {
+        .description {
+            font-size: 20px; /* Ukuran teks lebih besar untuk laptop */
+        }
+    
+        .menu-item {
+            font-size: 15px;
+        }
+    
+    }
+        
+        body {
+            font-family: "Times New Roman", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #787276;
+            color: white;
+        }
+        
+        .header {
+            background-color: #3E424B;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            margin: 0 40px;
+            align-items: flex-start;
+            gap: 20px; /* Tambahkan jarak antara menu dan deskripsi */
+        }
+        
+        .menu {
+            width: 200px;
+            background-color: #3E424B;
+            padding: 10px;
+            border-radius: 8px;
+            max-height: 750px;
+            margin-right: 20px; /* Tambahkan jarak dari deskripsi */
+        }
+        
+        .menu-item {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #222021;
+            background-color: #808588;
+            cursor: pointer;
+            text-align: left;
+            color:#ffffff;
+        }
+        
+        .menu-item:hover {
+            background-color: #0F1A2B;
+        }
+        
+        .description {
+            position: relative;
+            flex: 1;
+            padding: 20px;
+            border: 2px solid #787276;
+            height: calc(90vh - 80px);
+            border-radius: 8px;
+            text-align: justify;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            max-height: 800px;
+            margin-left: 20px;
+            overflow: hidden;
+        }
+        
+        /* Overlay transparan 70% */
+        .description::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* 70% gelap */
+            border-radius: 8px;
+            z-index: 1;
+        }
+        
+        /* Pastikan teks tetap di atas overlay */
+        .description-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        
+        .description-content {
+            position: relative;
+            z-index: 2;
+            overflow-y: auto;
+            max-height: 100%;
+            padding-right: 10px;
+        }
+        
+        figure {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        figure img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+        }
+        
+        figcaption {
+            font-size: 14px;
+            color: #ddd;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Yustisio's Education
+    </div>
+
+    <div class="container">
+        <div class="menu">
+            <button class="menu-item" onclick="showDescription('UPN')">UPN "Veteran" Yogyakarta</button>
+            <button class="menu-item" onclick="showDescription('SMAN')">SMAN 1 Balapulang</button>
+            <button class="menu-item" onclick="showDescription('SMPN')">SMPN 1 Slawi</button>
+            <button class="menu-item" onclick="showDescription('MDA')">MDA Miftahul Ulum</button>
+            <button class="menu-item" onclick="showDescription('SDN')">SDN Balapulang Kulon 01</button>
+            <button class="menu-item" onclick="showDescription('TPQ')">TPQ Miftahul Ulum</button>
+            <button class="menu-item" onclick="showDescription('TK')">TK Tunas Rimba</button>
+        </div>
+
+        <div class="description" id="description">
+            <div class="description-content">
+                <p>Click on a menu item to view the description here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const descriptions = {
+            'UPN': {
+                text: [
+                    '<p>I was once confused about college applications because I lacked a clear goal. I applied to many universities through different paths but wasn’t accepted. Returning to my passion for Physics, I applied independently and got accepted into several programs: Physics Education at UNS, Physics at UNSOED and UNY, Engineering Physics at Telkom University, and Geophysical Engineering at UPNVY. I briefly attended UNS but ultimately chose to focus on Geophysical Engineering at UPNVY.</p>',
+                    '<p>I have been involved in many activities during my time at UPNVY, including organizations, committees, competitions, and publications. I joined five different organizations over the course of three years, won several competitions, and also contributed to various publications. I was also busy with the 2021 batch activities, which we named EPICENTRUM. We went through many activities together, filled with laughter and joy.</p>',
+                    '<p>The learning atmosphere at UPN "Veteran" Yogyakarta, especially in Geophysical Engineering, is very conducive and supports both academic and personal development. Moreover, the teaching methods applied in this program emphasize a balance between theory and practice, allowing students to understand concepts more deeply and practically. The professors in Geophysical Engineering at UPN "Veteran" Yogyakarta are experienced academics and practitioners who are very dedicated to guiding students. They not only provide clear and systematic lecture materials but also create interactive discussion spaces, enabling students to be more active in exchanging ideas and understanding the material more effectively.',
+                    '<p>I started my thesis in September 2024 at Lemigas ESSDM and successfully completed it in March 2025 through my Thesis Defense. I have completed at least 159 credits or more than 80 different courses, achieving a GPA of 3.64.</p>',
+                ],
+                images: [
+                    { src: 'epicfirst.JPG', caption: 'Makrab pertama angkatan 2021'},
+                    { src: 'Epicentrum.jpg', caption: 'EPICENTRUM 2021'},
+                    { src: 'epickl1.jpg', caption: 'Kuliah Lapangan Pemetaan Geologi 2023'},
+                    { src: 'skirpsiepic.jpg', caption: 'Sidang Skripsi 2025'}
+                ],
+                background: 'upnvy.png'
+            },
+            'SMAN': {
+                text: [
+                    '<p>When I was about to enroll in high school in 2018, a new government regulation regarding the zoning system in education was implemented, which prevented me from continuing my studies in the city. As a result, I returned to Balapulang and enrolled at SMAN 1 Balapulang, located in Desa Banjaranyar, Balapulang Sub-district, Tegal Regency. At the beginning of high school, I had trouble adapting to the new friends I met in Slawi. I also felt insecure because of my high weight, which had reached the level of obesity at the time. However, I chose to persevere and kept trying to understand and adjust.</p>',
+                    '<p>I continued to participate in the first organization I joined, Paskibra, called Paskabaya. Additionally, I became very active in music activities. By the following year, I successfully lost weight due to my motivation to become part of the Paskibra flag-raising team on August 17th (Independence Day of Indonesia). I also became the Chairperson of Paskibra, Chairperson of MPK, Vice Chairperson of the Music Band, and won several competitions.</p>',
+                    '<p>The teachers at SMAN 1 Balapulang were very supportive and encouraged us to become individuals who think critically, creatively, and have the ability to solve problems effectively. I felt more prepared to face challenges and to prepare myself for further education. At SMAN 1 Balapulang, I learned a lot about time management, hard work, and the importance of collaboration in various projects. The national examination system was abolished in 2021 and replaced with the School Examination. I graduated with an average score of 85.95, with Physics being my highest score, as it is my favorite subject.</p>'
+                ],
+                images: [
+                    { src: 'smappdb.jpg', caption: 'Hari pertama berangkat SMA'},
+                    { src: 'smakls1.png', caption: 'Kelas 10 yang diwali oleh Ibu Isnaini Handayani dinamai Amoeba X Mia 3'},
+                    { src: 'smansabaduar.jpg', caption: 'Kelas 12 yang diwali oleh Ibu Titik Yuli dinamai DUAR (angkatan covid)'}
+                ],
+                background: 'smablp.png'
+            },
+            'SMPN': {
+                text: [
+                    '<p>I continued my education outside of the sub-district to SMP Negeri 1 Slawi in 2015. This school is located in Slawi Sub-district, Tegal Regency, and became the place where I developed myself at a higher educational level, with a national reference school status. With more complete facilities, such as comfortable, air-conditioned classrooms, laboratories, and sports areas, SMP Negeri 1 Slawi provided an environment that supported both learning and social interaction with friends.</p>',
+                    '<p>At this school, I began to study various subjects in greater depth, such as Mathematics, Indonesian Language, English, Natural Sciences (IPA), Social Sciences (IPS), and Religious Education. In addition to academic lessons, I also started to explore and try joining various organizations that expanded my interests and talents. The first organization I joined was the Paskibra, called Paskabara. It was at SMPN 1 Slawi that I also began to gain confidence in performing, as I started learning to play the saxophone in 2016 (second year of middle school).</p>',
+                    '<p>The teachers at SMP Negeri 1 Slawi were very supportive in encouraging us to think critically and creatively when solving tasks and projects. I also felt more trained in managing my time and developing discipline in my studies, which was essential for achieving academic goals. At this school, I began to face more serious challenges and processes in my learning, but there were also many opportunities to grow both academically and personally. I graduated from SMPN 1 Slawi with a total score of 34.2, achieving 98 in Bahasa Indonesia, 80 in Natural Science, 90 in Mathematics, and 74 in English.</p>',
+                ],
+                images: [
+                    { src: 'smp75.jpg', caption: 'Kelas 7.5 (Close) yang menjadi kelas pertama saya di SMP dimana saya juga menjadi ketua kelas, diwali oleh Bapak Suminto'},
+                    { src: 'smp83.jpg', caption: 'Kelas 8.3 (D3WA) yang menjadi kelas kedua saya di SMP, diwali oleh Ibu Wuryani'},
+                    { src: 'smplulus.jpg', caption: 'Foto kelulusan bersama di lapangan basket dengan membentuk koreo "SPENSAWI 18"'}
+                ],
+                background: 'smpslw.png'
+            },
+            'MDA': {
+                text: [
+                    '<p>I continued my education at MDA Miftahul Ulum in 2013, after graduating from TPQ Miftahul Ulum. At MDA, I deepened my studies of Islamic teachings, such as the Qur\'an, Hadith, fiqh, and Islamic history. Additionally, I participated in more intensive religious training to further deepen my understanding of Islamic teaching.</p>', 
+                    '<p>During the four years I studied at MDA Miftahul Ulum, I gained a wealth of knowledge and experiences that enriched my understanding of religion. I made a strong effort to stay focused on my studies and actively participated in all activities held at MDA. Through hard work and dedication, I graduated in 2017 with an average score of 7.88.</p>'
+                ],
+                images: [],
+                background: 'images/mda-bg.jpg'
+            },
+            'SDN': {
+                text: [
+                    '<p>I started attending SDN Balapulang Kulon 01 in 2009. This school is located in Desa Balapulang Kulon, Balapulang Sub-district, Tegal Regency, in a comfortable and conducive environment for learning. With a fairly spacious building and a beautiful school yard, SDN Balapulang Kulon 01 became the place where I gained knowledge for six years, from first grade to sixth grade. </p>',
+                    '<p>At this school, I began to learn various fundamental subjects such as Mathematics, Indonesian Language, Natural Sciences (IPA), Social Sciences (IPS), and Civic Education (PKn). In addition, I also learned about discipline, responsibility, and cooperation through various school activities. The teachers who taught there were very dedicated in educating and guiding us, which made me feel comfortable during the learning process.</p>',
+                    '<p>Apart from classroom activities, I also participated in several extracurricular activities that enriched my experience, such as scouting, sports, and arts. Some activities I took part in include the Scout Siaga Festival, Scout Penggalang Camp, Solo Song Competition, and serving as the Flag Ceremony Leader every Monday.</p>',
+                    '<p>I graduated from SDN Balapulang Kulon 01 with the National Exam in 2015. I received a total score of 26.65, with a score of 84 for Indonesian Language, 82.5 for Natural Science, and 100 for Mathematics, ranking first in my class.</p>',
+                ],
+                images: [
+                    { src: 'sdor.jpg', caption: 'Jalan santai bersama Pak Faozian (kelas 5 SD)' },
+                    { src: 'sdmr.jpg', caption: 'Tim marching band (kelas 6 SD)' },
+                    { src: 'sdun.jpg', caption: 'Pengumuman Ujian Nasional dan Perpisahan SD'}
+                ],
+                background: 'sdblp.png'
+            },
+            'TPQ': {
+                text: [
+                    '<p>I started my education at TPQ Miftahul Ulum in 2007, a place that not only taught religious knowledge but also developed character and positive habits from an early age. During my time at TPQ Miftahul Ulum, I learned various aspects of religion, such as tajwid, Arabic language, fiqh, and the basics of akhlak that are important in daily life. Additionally, I participated in regular religious activities such as study circles and other religious training sessions, which expanded my knowledge of Islam.</p>',
+                    '<p>Over the six years I studied at TPQ Miftahul Ulum, I not only learned religious knowledge but also developed social and leadership skills through interactions with my classmates and TPQ administrators. I worked hard to make the most of my study time and always strived to do my best in every test or evaluation given. Through dedication and effort, I graduated in 2013 with an average score of 7.83 and achieved 5th place in the school.</p>'
+                ],
+                images: [
+                    { src: 'TPQ.jpg', caption: 'Kelulusan TPQ Miftahul Ulum Tahun 2013'},
+                ],
+                background: 'images/tpq-bg.jpg'
+            },
+            'TK': {
+                text: [
+                    '<p>I started school at TK Tunas Rimba in 2007. TK Tunas Rimba is located in the Perhutani area of Balapulang Sub-district, a lush region with an environment that strongly supports the development of children during their early years. The school has simple facilities but is sufficient to meet the educational and play needs of children. During my time at TK, I learned many basic things that are crucial in shaping character and social skills, such as recognizing letters, numbers, and values like honesty and cooperation.</p>',
+                    '<p>The teachers at TK Tunas Rimba were very friendly and loving. They gave special attention to each child, encouraging us to learn through play in a fun and engaging way. Outdoor activities like playing in the garden and exploring the surrounding nature were also an important part of my experience there. At this school, I not only learned basic knowledge but also the importance of togetherness, taking care of the environment, and appreciating the nature around us. My experience at TK Tunas Rimba was very memorable and provided a strong foundation for my future educational journey.</p>'
+                ],
+                images: [],
+                background: 'tunasrimba.jpg'
+            }
+        };
+
+        function showDescription(org) {
+            const data = descriptions[org];
+            if (!data) return;
+
+            const descriptionElement = document.getElementById('description');
+            descriptionElement.style.backgroundImage = `url(${data.background})`;
+
+            let contentHTML = '<div class="description-content">';
+
+            // Menampilkan semua teks terlebih dahulu
+            if (data.text && data.text.length > 0) {
+                data.text.forEach((paragraph) => {
+                    contentHTML += paragraph;
+                });
+            } else {
+                contentHTML += '<p>No description available.</p>';
+            }
+
+            // Menampilkan semua gambar setelah teks
+            if (data.images && data.images.length > 0) {
+                data.images.forEach((image) => {
+                    contentHTML += `
+                        <figure>
+                            <img src="${image.src}" alt="${image.caption}">
+                            <figcaption>${image.caption}</figcaption>
+                        </figure>
+                    `;
+                });
+            }
+
+            // Menambahkan tombol "Go to Link" jika ada link
+            if (data.link) {
+                contentHTML += `
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="${data.link}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #F77F00; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                            Go to Link
+                        </a>
+                    </div>
+                `;
+            }
+
+            contentHTML += '</div>';
+            descriptionElement.innerHTML = contentHTML;
+        }
+
+    </script>
+</body>
+</html>
